@@ -6,6 +6,7 @@ namespace MVC5.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.Message = "React";
             return View();
         }
 
