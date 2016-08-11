@@ -1,0 +1,162 @@
+﻿@{
+    ViewBag.Title = "My First React Example";
+}
+<br/>
+<br/>
+<br />
+<br/>
+<div id="counter-div"></div>
+<div id="greeting-div"></div>
+<div id="container"></div>
+
+<link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+<script src="https://code.jquery.com/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script type="text/javascript">
+    function reloadJs(src) {
+        src = $(`script[src$="${src}"]`).attr("src");
+        $(`script[src$="${src}"]`).remove();
+        $('<script/>').attr('src', src).appendTo('body');
+    }
+    function loadjscssfile(filename, filetype) {
+        $('script[src$="${filename}"]').remove();  //Just in case it already is loade
+        var fileref;
+        if (filetype === "js") { //if filename is a external JavaScript file
+            fileref = document.createElement('script');
+            fileref.setAttribute("type", "text/javascript");
+            fileref.setAttribute("src", filename);
+        } else if (filetype === "babel") { //if filename is an external CSS file
+            fileref = document.createElement("script");
+            fileref.setAttribute("type", "text/babel");
+            fileref.setAttribute("src", filename);
+        } else if (filetype === "css") { //if filename is an external CSS file
+            fileref = document.createElement("link");
+            fileref.setAttribute("rel", "stylesheet");
+            fileref.setAttribute("type", "text/css");
+            fileref.setAttribute("href", filename);
+        }
+        if (typeof fileref != "undefined") {
+            document.getElementsByTagName("head")[0].appendChild(fileref);
+        }
+        reloadJs(filename);
+    }
+</script>
+
+@*<script src="~/Scripts/react-15.3.0/build/react.js"></script>*@
+@*<script src="~/Scripts/react-15.3.0/build/react-dom.js"></script>
+<script src="~/Scripts/react-15.3.0/build/react-dom-server.js"></script>*@
+@*<script src="~/Scripts/react-15.3.0/build/react-with-addons.js"></script>*@
+@*<script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.21/webcomponents.js"></script>*
+@*<script src="https://fb.me/react-15.0.0.js"></script>
+    <script src="https://fb.me/react-dom-15.0.0.js"></script>*@
+
+@*<script type="text/babel" src="~/Scripts/random-message.jsx"></script>*@
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+
+<script type="text/javascript">
+    function LoadReact() {
+        $("#greeting-div").empty();
+        $("#counter-div").empty();
+        loadjscssfile("../../Scripts/react-15.3.0/build/react.js", "js");
+        loadjscssfile("../../Scripts/react-15.3.0/build/react-dom.js", "js");
+        var selectedValue = document.getElementById("ddlReact").value;
+        switch (selectedValue) {
+            case "1":  //random-message
+                $("#counter-div").empty();
+                $("#container").empty();
+                loadjscssfile("../../Scripts/random-message.jsx", "babel");
+                break;
+            case "2": //basic
+                $("#counter-div").text("basic");
+                $("#container").empty();
+                loadjscssfile("../../Scripts/react-15.3.0/examples/basic/index.jsx", "babel");
+                break;
+            case "3":  //basic-clickcounter
+                $("#counter-div").empty();
+                $("#container").empty();
+                loadjscssfile("../../Content/base.css", "css");
+                loadjscssfile("../../Scripts/react-15.3.0/examples/basic-click-counter/index.jsx", "babel");
+                break;
+            case "4":  //basic-commonjs
+                $("#counter-div").text("basic");
+                loadjscssfile("../../Content/base.css", "css");
+                loadjscssfile("../../Scripts/react-15.3.0/examples/basic-commonjs/index.jsx", "babel");
+                break;
+            case "5":  //basic-jsx
+                $("#counter-div").text("basic");
+                $("#container").empty();
+                loadjscssfile("../../Content/base.css", "css");
+                loadjscssfile("../../Scripts/react-15.3.0/examples/basic-jsx/index.jsx", "babel");
+                break;
+            case "6":  //basic-jsx-external
+                $("#counter-div").text("basic");
+                $("#container").empty();
+                loadjscssfile("../../Content/base.css", "css");
+                //loadjscssfile("../../Scripts/react-15.3.0/examples/basic-jsx-external/index.jsx", "babel");
+                loadjscssfile("../../Scripts/react-15.3.0/examples/basic-jsx-external/example.jsx", "babel");
+                break;
+            case "7": //basic-jsx-harmony
+                $("#counter-div").text("basic");
+                $("#container").empty();
+                loadjscssfile("../../Content/base.css", "css");
+                loadjscssfile("../../Scripts/react-15.3.0/examples/basic-jsx-harmony/index.jsx", "babel");
+                break;
+            case "8": //basic-jsx-precompile
+                $("#counter-div").text("basic");
+                $("#container").empty();
+                loadjscssfile("../../Content/base.css", "css");
+                //loadjscssfile("../../Scripts/react-15.3.0/examples/basic-jsx-precompile/index.jsx", "babel");
+                loadjscssfile("../../Scripts/react-15.3.0/examples/basic-jsx-precompile/example.jsx", "babel");
+                break;
+            case "9":  //fiber
+                $("#counter-div").text("basic");
+                $("#container").empty();
+                loadjscssfile("../../Content/base.css", "css");
+                loadjscssfile("../../Scripts/react-15.3.0/examples/fiber/index.jsx", "babel");
+                break;
+            case "10": //quadratic
+                $("#counter-div").empty();
+                $("#container").empty();
+                //loadjscssfile("../../Scripts/react-15.3.0/examples/quadratic/index.jsx", "babel");
+                loadjscssfile("../../Scripts/react-15.3.0/examples/quadratic/example.jsx", "babel");
+                break;
+            case "11": //transition
+                $("#counter-div").empty();
+                $("#container").empty();
+                loadjscssfile("../../Content/base.css", "css");
+                loadjscssfile("../../Scripts/react-15.3.0/examples/transitions/transition.css", "css");
+                loadjscssfile("../../Scripts/react-15.3.0/build/react-with-addons.js", "js");
+                loadjscssfile("../../Scripts/react-15.3.0/build/react-dom.js", "js");
+                loadjscssfile("../../Scripts/react-15.3.0/examples/transitions/index.jsx", "babel");
+                break;
+            case "12": //webcomponenets
+                $("#counter-div").empty();
+                $("#container").empty();
+                loadjscssfile("../../Content/base.css", "css");
+                loadjscssfile("https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.21/webcomponents.js", "js");
+                loadjscssfile("../../Scripts/react-15.3.0/examples/webcomponents/index.jsx", "babel");
+                break;
+
+            default:
+        }
+    }
+
+</script>
+<select id="ddlReact" onchange="LoadReact()">
+    <option value="1">random-message</option>
+    <option value="2">basic</option>
+    <option value="3">basic-click-counter</option>
+    <option value="4">basic-commonjs(Not Working!!) </option>
+    <option value="5">basic-jsx</option>
+    <option value="6">basic-jsx-external</option>
+    <option value="7">basic-jsx-harmony</option>
+    <option value="8">basic-jsx-precompile</option>
+    <option value="9">fiber</option>
+    <option value="10">quadratic</option>
+    <option value="11">transitions</option>
+    <option value="12">webcomponents</option>
+</select>
+@*@Scripts.Render("~/bundles/jsx")*@
+@*<script type="text/babel" src="~/Scripts/react-15.3.0/examples/basic/index.jsx"></script>*@
+
